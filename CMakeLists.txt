@@ -30,10 +30,4 @@ INCLUDE_DIRECTORIES(
   GLOB "${CMAKE_CURRENT_SOURCE_DIR}/ecos/external/amd/include/" *.h
 )
 
-
-add_custom_target(
-    silenceEcos
-    COMMAND sed -i "'s/PRINTLEVEL (2)/PRINTLEVEL (0)/'" "${CMAKE_CURRENT_SOURCE_DIR}/ecos/include/glblopts.h"
-)
 ADD_TORCH_PACKAGE(ecos "${src}" "${luasrc}")
-ADD_DEPENDENCIES(ecos silenceEcos)
