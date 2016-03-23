@@ -4,7 +4,7 @@
 second-order cone programs (SOCPs) in Torch.*
 
 [travis-image]: https://travis-ci.org/bamos/ecos.torch.png?branch=master
-[travis]: http://travis-ci.org/cmusatyalab/openface
+[travis]: http://travis-ci.org/bamos/ecos.torch
 
 [license-image]: http://img.shields.io/badge/license-Apache--2-blue.svg?style=flat
 [license]: LICENSE
