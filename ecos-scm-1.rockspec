@@ -17,6 +17,7 @@ description = {
 
 dependencies = {
    "argcheck",
+   "luaffi",
    "torch >= 7.0"
 }
 
