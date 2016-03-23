@@ -52,5 +52,5 @@ before_script:
 script:
 - ${INSTALL_PREFIX}/bin/luarocks make
 - export PATH=${INSTALL_PREFIX}/bin:$PATH
-- export TESTTH=$(which th | head -n 1)
-- ${TESTTH} test.lua
+- export TESTLUA=$(which luajit lua | head -n 1)
+- ${TESTLUA} -lecos test.lua
