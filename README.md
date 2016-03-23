@@ -19,7 +19,7 @@ or issues.
 
 ---
 
-# Introduction
+# Introduction to ECOS
 
 **Visit http://www.embotech.com/ECOS for detailed information on ECOS.**
 
@@ -50,7 +50,8 @@ second-order, and exponential cones:
 ```
 K = R_+ x Q_n1 x ... x Q_nN x K_e x ... x K_e
 ```
----
+
+# This Library
 
 This repository is an unofficial [Torch](http://torch.ch/) wrapper to
 the [ECOS C API](https://www.embotech.com/ECOS/How-to-use/C-API).
