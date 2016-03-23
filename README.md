@@ -72,6 +72,8 @@ luarocks make
 ## Linear Program
 
 ```lua
+local ecos = require 'ecos'
+
 local G = torch.Tensor{{-1, 1}, {-1, -1}, {0, -1}, {1, -2}}
 local h = torch.Tensor{1.0, -2.0, 0.0, 4.0}
 local c = torch.Tensor{2.0, 1.0}
