@@ -84,7 +84,7 @@ print(x) -- Optimal x is [0.5, 1.5]
 
 # Tests
 
-After installing the library with `luarocks`, our tests at
+After installing the library with `luarocks`, our tests in
 [test.lua](https://github.com/bamos/ecos.torch/blob/master/test.lua)
 can be run with `th test.lua`.
 
