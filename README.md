@@ -62,7 +62,7 @@ After [setting up Torch](http://torch.ch/docs/getting-started.html),
 this library can be installed with:
 
 ```bash
-luarocks install http://github.com/bamos/ecos.torch/raw/master/ecos-scm-1.rockspec
+luarocks install https://github.com/bamos/ecos.torch/raw/master/ecos-scm-1.rockspec
 ```
 
 or equivalently:
