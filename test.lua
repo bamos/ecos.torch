@@ -16,7 +16,7 @@ function ecosTest.SmallLP()
    local c = torch.Tensor{2.0, 1.0}
    local optX = torch.Tensor{0.5, 1.5}
 
-   local status, x = ecos.solveLP{c=c, G=G, h=h}
+   local status, x = ecos.solve{c=c, G=G, h=h}
    tester:asserteq(status, 0, 'Nonzero status: ' .. status)
    tester:assertTensorEq(x, optX, eps, 'Invalid optimal value.')
 end

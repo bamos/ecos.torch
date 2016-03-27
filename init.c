@@ -41,10 +41,11 @@ void denseToCCS(THDoubleTensor *X,
   (*col_ptr)[nCol] = k;
 }
 
-int solveLP(THDoubleTensor *rx, THDoubleTensor *c,
-            THDoubleTensor *A, THDoubleTensor *b,
-            THDoubleTensor *G, THDoubleTensor *h,
-            int verbose) {
+int solve(THDoubleTensor *rx, THDoubleTensor *c,
+          THDoubleTensor *A, THDoubleTensor *b,
+          THDoubleTensor *G, THDoubleTensor *h,
+          THIntTensor *SOcones, int nExpCones,
+          int verbose) {
   if (A) {
     THArgCheck(A->size[0] == b->size[0], 2, "A and b incompatible.");
     THArgCheck(A->size[1] == c->size[0], 2, "A and c incompatible.");
@@ -71,11 +72,27 @@ int solveLP(THDoubleTensor *rx, THDoubleTensor *c,
   if (A) {
     p = A->size[0];
   }
-  int l = m; // Dimension of the positive orthant.
+
   int ncones = 0; // Number of second-order cones present in problem.
-  void *q = 0; // Array of length ncones;
-               // q[i] defines the dimension of the cone i.
-  int e = 0; // Number of exponential cones present in problem.
+  idxint *q = 0; // Array of length ncones;
+                 // q[i] defines the dimension of the cone i.
+  if (SOcones) {
+    ncones = SOcones->size[0];
+    q = malloc(sizeof(idxint)*ncones);
+    int *q_int = THIntTensor_data(SOcones);
+    for (auto i = 0; i < ncones; i++) {
+      q[i] = (idxint) q_int[i];
+    }
+    printf("ncones: %lu\n", ncones);
+    printf("q[0]: %lu\n", q[0]);
+    printf("q[0]: %d\n", q[0]);
+  }
+
+  idxint e = (idxint) nExpCones; // Number of exponential cones present in problem.
+  printf("e: %lu\n", e);
+
+  idxint l = m - ncones - 3*e; // Dimension of the positive orthant.
+  printf("l: %lu\n", l);
 
   // Arrays for matrix G in column compressed storage (CCS).
   pfloat *Gpr = 0;
@@ -109,12 +126,31 @@ int solveLP(THDoubleTensor *rx, THDoubleTensor *c,
                                Gpr, Gjc, Gir,
                                Apr, Ajc, Air,
                                c_, h_, b_);
+  idxint status;
+  if (!ecosWork) {
+    status = 1;
+    goto exit_free;
+  }
+
   ecosWork->stgs->verbose = verbose;
-  idxint status = ECOS_solve(ecosWork);
+
+  status = ECOS_solve(ecosWork);
 
   pfloat* x = THDoubleTensor_data(rx);
   memcpy(x, ecosWork->x, sizeof(double)*n);
 
   ECOS_cleanup(ecosWork, 0);
+
+ exit_free:
+  if (Gpr) {
+    free(Gpr);
+    free(Gjc);
+    free(Gir);
+  }
+  if (Apr) {
+    free(Apr);
+    free(Ajc);
+    free(Air);
+  }
   return status;
 }

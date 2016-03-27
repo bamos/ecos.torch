@@ -4,33 +4,30 @@ local M = {}
 
 local ffi = require 'ffi'
 ffi.cdef [[
-   int solveLP(THDoubleTensor *rx, THDoubleTensor *c,
-               THDoubleTensor *A, THDoubleTensor *b,
-               THDoubleTensor *G, THDoubleTensor *h,
-               int verbose);
+int solve(THDoubleTensor *rx, THDoubleTensor *c,
+          THDoubleTensor *A, THDoubleTensor *b,
+          THDoubleTensor *G, THDoubleTensor *h,
+          THIntTensor *SOcones, int nExpCones,
+          int verbose);
 ]]
 
 local clib = ffi.load(package.searchpath('libecos', package.cpath))
 
-local solveLPcheck = argcheck{
+local solveCheck = argcheck{
    pack=true,
-   help=[[
-Solve a linear program of the form:
-
-  minimize    c^T x
-  subject to  Ax = b
-              Gx <= h
-]],
    {name='c', type='torch.DoubleTensor'},
    {name='A', type='torch.DoubleTensor', opt=true},
    {name='b', type='torch.DoubleTensor', opt=true},
    {name='G', type='torch.DoubleTensor', opt=true},
    {name='h', type='torch.DoubleTensor', opt=true},
+   {name='SOcones', type='torch.IntTensor', opt=true},
+   {name='nExpCones', type='number', opt=true, default=0},
    {name='verbose', type='number', opt=true, default=0}
 }
-function M.solveLP(...)
-   local args = solveLPcheck(...)
+function M.solve(...)
+   local args = solveCheck(...)
    local A_, b_, G_, h_
+   local c_ = args.c:cdata()
    if args.A then
       A_ = args.A:cdata()
       b_ = args.b:cdata()
@@ -39,10 +36,13 @@ function M.solveLP(...)
       G_ = args.G:cdata()
       h_ = args.h:cdata()
    end
-   c_ = args.c:cdata()
+   local q_
+   if args.SOcones then
+      q_ = args.SOcones:cdata()
+   end
    local rx = torch.DoubleTensor(args.c:size(1))
-   local status = clib.solveLP(rx:cdata(), c_, A_, b_,
-                               G_, h_, args.verbose)
+   local status = clib.solve(rx:cdata(), c_, A_, b_,
+                             G_, h_, q_, args.nExpCones, args.verbose)
    return status, rx
 end
 
