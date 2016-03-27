@@ -31,17 +31,11 @@ Solve a linear program of the form:
 function M.solveLP(...)
    local args = solveLPcheck(...)
    local A_, b_, G_, h_
-   if not args.A then
-      A_ = nil
-      b_ = nil
-   else
+   if args.A then
       A_ = args.A:cdata()
       b_ = args.b:cdata()
    end
-   if not args.G then
-      G_ = nil
-      h_ = nil
-   else
+   if args.G then
       G_ = args.G:cdata()
       h_ = args.h:cdata()
    end
