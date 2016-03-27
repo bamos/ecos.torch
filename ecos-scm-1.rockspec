@@ -2,7 +2,7 @@ package = "ecos"
 version = "scm-1"
 
 source = {
-   url = "git://github.com/bamos/ecos.torch",
+   url = "gitrec://github.com/bamos/ecos.torch",
    tag = "master"
 }
 
@@ -17,6 +17,7 @@ description = {
 
 dependencies = {
    "argcheck",
+   "luarocks-fetch-gitrec",
    "luaffi",
    "torch >= 7.0"
 }
