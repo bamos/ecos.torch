@@ -43,7 +43,8 @@ void denseToCCS(THDoubleTensor *X,
 
 int solveLP(THDoubleTensor *rx, THDoubleTensor *c,
             THDoubleTensor *A, THDoubleTensor *b,
-            THDoubleTensor *G, THDoubleTensor *h) {
+            THDoubleTensor *G, THDoubleTensor *h,
+            int verbose) {
   if (A) {
     THArgCheck(A->size[0] == b->size[0], 2, "A and b incompatible.");
     THArgCheck(A->size[1] == c->size[0], 2, "A and c incompatible.");
@@ -108,6 +109,7 @@ int solveLP(THDoubleTensor *rx, THDoubleTensor *c,
                                Gpr, Gjc, Gir,
                                Apr, Ajc, Air,
                                c_, h_, b_);
+  ecosWork->stgs->verbose = verbose;
   idxint status = ECOS_solve(ecosWork);
 
   pfloat* x = THDoubleTensor_data(rx);

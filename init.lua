@@ -6,7 +6,8 @@ local ffi = require 'ffi'
 ffi.cdef [[
    int solveLP(THDoubleTensor *rx, THDoubleTensor *c,
                THDoubleTensor *A, THDoubleTensor *b,
-               THDoubleTensor *G, THDoubleTensor *h);
+               THDoubleTensor *G, THDoubleTensor *h,
+               int verbose);
 ]]
 
 local clib = ffi.load(package.searchpath('libecos', package.cpath))
@@ -24,7 +25,8 @@ Solve a linear program of the form:
    {name='A', type='torch.DoubleTensor', opt=true},
    {name='b', type='torch.DoubleTensor', opt=true},
    {name='G', type='torch.DoubleTensor', opt=true},
-   {name='h', type='torch.DoubleTensor', opt=true}
+   {name='h', type='torch.DoubleTensor', opt=true},
+   {name='verbose', type='number', opt=true, default=0}
 }
 function M.solveLP(...)
    local args = solveLPcheck(...)
@@ -45,7 +47,8 @@ function M.solveLP(...)
    end
    c_ = args.c:cdata()
    local rx = torch.DoubleTensor(args.c:size(1))
-   local status = clib.solveLP(rx:cdata(), c_, A_, b_, G_, h_)
+   local status = clib.solveLP(rx:cdata(), c_, A_, b_,
+                               G_, h_, args.verbose)
    return status, rx
 end
 
