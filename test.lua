@@ -1,6 +1,6 @@
 #!/usr/bin/env th
 
-require 'torch'
+local torch = require 'torch'
 torch.setdefaulttensortype('torch.DoubleTensor')
 
 local ecos = require 'ecos'

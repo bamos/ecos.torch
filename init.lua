@@ -1,3 +1,4 @@
+local torch = require 'torch'
 local argcheck = require 'argcheck'
 
 local M = {}
