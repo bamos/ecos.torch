@@ -83,16 +83,11 @@ int solve(THDoubleTensor *rx, THDoubleTensor *c,
     for (auto i = 0; i < ncones; i++) {
       q[i] = (idxint) q_int[i];
     }
-    printf("ncones: %lu\n", ncones);
-    printf("q[0]: %lu\n", q[0]);
-    printf("q[0]: %d\n", q[0]);
   }
 
   idxint e = (idxint) nExpCones; // Number of exponential cones present in problem.
-  printf("e: %lu\n", e);
 
   idxint l = m - ncones - 3*e; // Dimension of the positive orthant.
-  printf("l: %lu\n", l);
 
   // Arrays for matrix G in column compressed storage (CCS).
   pfloat *Gpr = 0;
@@ -128,7 +123,7 @@ int solve(THDoubleTensor *rx, THDoubleTensor *c,
                                c_, h_, b_);
   idxint status;
   if (!ecosWork) {
-    status = 1;
+    status = 42;
     goto exit_free;
   }
 
