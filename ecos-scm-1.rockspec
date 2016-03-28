@@ -7,9 +7,9 @@ source = {
 }
 
 description = {
-   summary = "ECOS wrapper for LPs and SOCPs",
+   summary = "ECOS bindings for LPs and SOCPs",
    detailed = [[
-   Unofficial ECOS wrapper to solve linear programs (LPs) and
+   Unofficial ECOS bindings to solve linear programs (LPs) and
    second-order cone programs (SOCPs).
 ]],
    homepage = "https://github.com/bamos/ecos.torch"

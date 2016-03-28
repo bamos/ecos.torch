@@ -1,6 +1,6 @@
 # ecos.torch • [ ![Build Status] [travis-image] ] [travis] [ ![License] [license-image] ] [license]
 
-*Unofficial ECOS wrapper to solve linear programs (LPs) and
+*Unofficial ECOS bindings to solve linear programs (LPs) and
 second-order cone programs (SOCPs) in Torch.*
 
 [travis-image]: https://travis-ci.org/bamos/ecos.torch.png?branch=master
@@ -53,7 +53,7 @@ K = R_+ x Q_n1 x ... x Q_nN x K_e x ... x K_e
 
 # This Library
 
-This repository is an unofficial [Torch](http://torch.ch/) wrapper to
+This repository provides unofficial [Torch](http://torch.ch/) bindings to
 the [ECOS C API](https://www.embotech.com/ECOS/How-to-use/C-API).
 
 # Setup
@@ -84,7 +84,7 @@ local G = torch.Tensor{{-1, 1}, {-1, -1}, {0, -1}, {1, -2}}
 local h = torch.Tensor{1.0, -2.0, 0.0, 4.0}
 local c = torch.Tensor{2.0, 1.0}
 
-local status, x = ecos.solveLP{c=c, G=G, h=h}
+local status, x = ecos.solve{c=c, G=G, h=h}
 print(x) -- Optimal x is [0.5, 1.5]
 ```
 
@@ -97,5 +97,5 @@ can be run with `th test.lua`.
 # License
 
 + ECOS is under the GPL and remains unmodified.
-+ This ECOS wrapper library is
++ The original code in this repository (the ECOS bindings) is
   [Apache-licensed](https://github.com/bamos/ecos.torch/blob/master/LICENSE).
