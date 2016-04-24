@@ -11,14 +11,6 @@ second-order cone programs (SOCPs) in Torch.*
 
 ---
 
-**Warning:** This package is unstable, unfinished, and under development.
-Please see our [issue tracker](https://github.com/bamos/ecos.torch/issues)
-for unresolved issues.
-Contact [Brandon Amos](http://bamos.github.io) with any questions
-or issues.
-
----
-
 # Introduction to ECOS
 
 **Visit http://www.embotech.com/ECOS for detailed information on ECOS.**
