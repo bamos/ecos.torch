@@ -41,6 +41,17 @@ function M.solve(...)
    if args.SOcones then
       q_ = args.SOcones:cdata()
    end
+   if args.SOcones or args.nExpCones > 0 then
+      print [[
+======
+ecos.torch warning:
+
+Second order and exponential cones have not been validated.
+If you are interested in using these please join our discussion at
+https://github.com/bamos/ecos.torch/issues/1
+======
+]]
+   end
    local rx = torch.DoubleTensor(args.c:size(1))
    local status = clib.solve(rx:cdata(), c_, A_, b_,
                              G_, h_, q_, args.nExpCones, args.verbose)

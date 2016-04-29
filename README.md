@@ -86,6 +86,19 @@ After installing the library with `luarocks`, our tests in
 [test.lua](https://github.com/bamos/ecos.torch/blob/master/test.lua)
 can be run with `th test.lua`.
 
+# Issues and Roadmap
+
+1. While this is working well for linear programs, I am not using
+   and have not tested the second-order or exponential cones.
+   Please comment in issue #1 if you are interested in using these.
+2. ECOS uses a sparse matrix format and the code current converts
+   a dense Torch tensor to a sparse array in C in every call.
+   This could potentially be optimized by using sparse Torch
+   tensors and doing the conversion in Torch.
+   Then the user could then optionally maintain sparse
+   Tensors in Torch.
+   Please comment in issue #2 if you are interested in this.
+
 # License
 
 + ECOS is under the GPL and remains unmodified.
