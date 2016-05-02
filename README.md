@@ -90,14 +90,18 @@ can be run with `th test.lua`.
 
 1. While this is working well for linear programs, I am not using
    and have not tested the second-order or exponential cones.
-   Please comment in issue #1 if you are interested in using these.
+   Please comment in
+   [Issue 1](https://github.com/bamos/ecos.torch/issues/1)
+   if you are interested in using these.
 2. ECOS uses a sparse matrix format and the code current converts
    a dense Torch tensor to a sparse array in C in every call.
    This could potentially be optimized by using sparse Torch
    tensors and doing the conversion in Torch.
    Then the user could then optionally maintain sparse
    Tensors in Torch.
-   Please comment in issue #2 if you are interested in this.
+   Please comment in
+   [Issue 2](https://github.com/bamos/ecos.torch/issues/2)
+   if you are interested in this.
 
 # License
 
