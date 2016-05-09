@@ -41,11 +41,11 @@ void denseToCCS(THDoubleTensor *X,
   (*col_ptr)[nCol] = k;
 }
 
-int solve(THDoubleTensor *rx, THDoubleTensor *c,
-          THDoubleTensor *A, THDoubleTensor *b,
-          THDoubleTensor *G, THDoubleTensor *h,
-          THIntTensor *SOcones, int nExpCones,
-          int verbose) {
+int ETsolve(THDoubleTensor *rx, THDoubleTensor *c,
+             THDoubleTensor *A, THDoubleTensor *b,
+             THDoubleTensor *G, THDoubleTensor *h,
+             THIntTensor *SOcones, int nExpCones,
+             int verbose) {
   if (A) {
     THArgCheck(A->size[0] == b->size[0], 2, "A and b incompatible.");
     THArgCheck(A->size[1] == c->size[0], 2, "A and c incompatible.");
