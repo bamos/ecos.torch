@@ -41,7 +41,7 @@ void denseToCCS(THDoubleTensor *X,
   (*col_ptr)[nCol] = k;
 }
 
-int ETsolve(THDoubleTensor *rx, THDoubleTensor *c,
+int ET_solve(THDoubleTensor *rx, THDoubleTensor *c,
              THDoubleTensor *A, THDoubleTensor *b,
              THDoubleTensor *G, THDoubleTensor *h,
              THIntTensor *SOcones, int nExpCones,

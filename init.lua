@@ -5,7 +5,7 @@ local M = {}
 
 local ffi = require 'ffi'
 ffi.cdef [[
-int ETsolve(THDoubleTensor *rx, THDoubleTensor *c,
+int ET_solve(THDoubleTensor *rx, THDoubleTensor *c,
           THDoubleTensor *A, THDoubleTensor *b,
           THDoubleTensor *G, THDoubleTensor *h,
           THIntTensor *SOcones, int nExpCones,
@@ -53,8 +53,8 @@ https://github.com/bamos/ecos.torch/issues/1
 ]]
    end
    local rx = torch.DoubleTensor(args.c:size(1))
-   local status = clib.ETsolve(rx:cdata(), c_, A_, b_,
-                               G_, h_, q_, args.nExpCones, args.verbose)
+   local status = clib.ET_solve(rx:cdata(), c_, A_, b_,
+                                G_, h_, q_, args.nExpCones, args.verbose)
    return status, rx
 end
 
